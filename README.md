@@ -77,7 +77,7 @@ A couple of native modules (`node-pty`, `better-sqlite3`) get rebuilt for Electr
 curl -fsSL https://raw.githubusercontent.com/jkasun/pixel-city/main/install.sh | sh
 ```
 
-Grabs the latest release, drops it in `/Applications` (mac) or `~/.local/bin/pixelcity` (linux), and tells you whether `claude` or `codex` is already on your PATH. On mac it strips the quarantine flag and ad-hoc signs the app so Gatekeeper doesn't yell — the binary isn't notarized, so if you'd rather avoid that, build from source instead. Windows users: grab the `.exe` from the [latest release](https://github.com/jkasun/pixel-city/releases/latest).
+Grabs the latest release, drops it in `/Applications` (mac) or `~/.local/bin/pixelcity` (linux), and tells you whether `claude` or `codex` is already on your PATH. On mac it strips the quarantine flag and ad-hoc signs the app so Gatekeeper doesn't yell — the binary isn't notarized, so if you'd rather avoid that, build from source instead. Windows builds aren't published yet — for now, [build from source](#from-source).
 
 ### From source
 

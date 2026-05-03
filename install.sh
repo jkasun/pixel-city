@@ -43,7 +43,7 @@ detect_platform() {
   case "$uname_s" in
     Darwin) os="mac" ;;
     Linux)  os="linux" ;;
-    *) die "Unsupported OS: $uname_s. Windows: download the .exe from https://github.com/${REPO}/releases/latest" ;;
+    *) die "Unsupported OS: $uname_s. (Windows builds aren't published yet — you can build from source: https://github.com/${REPO}#from-source)" ;;
   esac
 
   case "$uname_m" in

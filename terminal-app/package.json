@@ -163,6 +163,7 @@
     "@electron/rebuild": "^4.0.3",
     "@modelcontextprotocol/sdk": "^1.27.1",
     "@tailwindcss/vite": "^4.2.2",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/dompurify": "^3.0.5",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.11.0",

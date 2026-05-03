@@ -19,8 +19,8 @@ jobs:
             target: dist:mac
           - os: ubuntu-latest
             target: dist:linux
-          - os: windows-latest
-            target: dist:win
+        # Windows builds are intentionally excluded for now — re-enable
+        # by adding `- os: windows-latest, target: dist:win` here.
 
     runs-on: ${{ matrix.os }}
 
@@ -50,7 +50,6 @@ jobs:
           name: pixelcity-${{ matrix.os }}
           path: |
             terminal-app/release/*.dmg
-            terminal-app/release/*.exe
             terminal-app/release/*.AppImage
           if-no-files-found: ignore
 
