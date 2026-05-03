@@ -80,6 +80,15 @@ export interface AppConfig {
     minWidth: number
     minHeight: number
   }
+  update: {
+    enabled: boolean
+    channel: 'stable' | 'prerelease'
+    repo: string
+    /** Dev/testing: when set, skips the GitHub fetch and pretends this version is available. */
+    mockLatestVersion?: string
+    /** Dev/testing: download URL the mocked banner button points at. */
+    mockDownloadUrl?: string
+  }
 }
 
 // ── Defaults ──────────────────────────────────────────────
@@ -124,6 +133,7 @@ const DEFAULTS: AppConfig = {
   llm: { maxTokenBudget: 50000, keepRecentMessages: 10 },
   browser: { defaultUrl: 'https://www.google.com' },
   window: { width: 1400, height: 700, minWidth: 800, minHeight: 400 },
+  update: { enabled: true, channel: 'stable', repo: 'jkasun/pixel-city' },
 }
 
 // ── Loader ────────────────────────────────────────────────

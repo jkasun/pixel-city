@@ -67,3 +67,13 @@ window:
   height: 700
   minWidth: 800
   minHeight: 400
+
+# ── Update Check ──────────────────────────────────────────
+# On launch, the app pings GitHub once to see if a newer release is out.
+# Set enabled: false to skip the check entirely.
+update:
+  enabled: true
+  channel: stable                       # stable | prerelease
+  repo: jkasun/pixel-city               # owner/repo to check against
+  # mockLatestVersion: 9.9.9            # uncomment to fake an available update (dev/testing)
+  # mockDownloadUrl: https://example.com/download   # optional: where the mocked Download button points

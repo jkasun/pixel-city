@@ -27,6 +27,9 @@ Thumbs.db
 .idea/
 *.swp
 
+# local docker setup (not part of OSS release)
+docker/
+
 # logs / coverage
 *.log
 coverage/

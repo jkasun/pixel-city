@@ -15,10 +15,10 @@
     "dev:electron": "wait-on http://localhost:5913 && wait-on dist/electron/main.js && VITE_DEV_SERVER_URL=http://localhost:5913 electronmon .",
     "build:main": "tsc -p tsconfig.electron.json",
     "build": "npm run build:main && npm run bundle-mcp:mempalace && vite build",
-    "dist": "npm run build && npm run bundle-mcp && electron-builder --mac --win --linux --config",
-    "dist:mac": "npm run build && npm run bundle-mcp && electron-builder --mac --config",
-    "dist:win": "npm run build && npm run bundle-mcp && electron-builder --win --config",
-    "dist:linux": "npm run build && npm run bundle-mcp && electron-builder --linux --config",
+    "dist": "npm run build && npm run bundle-mcp && electron-builder --mac --win --linux --config --publish never",
+    "dist:mac": "npm run build && npm run bundle-mcp && electron-builder --mac --config --publish never",
+    "dist:win": "npm run build && npm run bundle-mcp && electron-builder --win --config --publish never",
+    "dist:linux": "npm run build && npm run bundle-mcp && electron-builder --linux --config --publish never",
     "bundle-mcp": "npm run bundle-mcp:pixel-city && npm run bundle-mcp:mempalace",
     "bundle-mcp:pixel-city": "node tools/bundle-mcp-servers.mjs",
     "bundle-mcp:mempalace": "rm -rf dist/mempalace-mcp-server && mkdir -p dist/mempalace-mcp-server && npx esbuild mempalace-mcp-server/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/mempalace-mcp-server/index.mjs --banner:js=\"import{createRequire}from'module';const require=createRequire(import.meta.url);\" --external:better-sqlite3",
@@ -83,9 +83,18 @@
       }
     ],
     "icon": "build/icon.png",
+    "artifactName": "PixelCity-${version}-${os}-${arch}.${ext}",
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": "dmg",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
       "icon": "build/icon.icns"
     },
     "win": {
@@ -101,7 +110,15 @@
       "executableName": "Pixel City"
     },
     "linux": {
-      "target": "AppImage",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
       "category": "Development",
       "icon": "build/icon.png"
     }
@@ -146,6 +163,7 @@
     "@electron/rebuild": "^4.0.3",
     "@modelcontextprotocol/sdk": "^1.27.1",
     "@tailwindcss/vite": "^4.2.2",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/dompurify": "^3.0.5",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.11.0",

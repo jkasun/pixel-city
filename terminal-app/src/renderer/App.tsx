@@ -4,6 +4,7 @@ import { QuickMenu } from './QuickMenu.js'
 import { PluginPanel } from './PluginPanel.js'
 import { AgentPanel } from './AgentPanel.js'
 import { StatusBar } from './StatusBar.js'
+import { UpdateBanner } from './UpdateBanner.js'
 import { SettingsModal } from './SettingsModal.js'
 import { WorldContextProvider, useWorldContext } from './contexts/WorldContext.js'
 import { CityContextProvider, useCityContext } from './contexts/CityContext.js'
@@ -161,6 +162,7 @@ function AppInner() {
 
   return (
     <div id="app-wrapper" data-testid="app-root">
+      <UpdateBanner />
       <Toolbar onOpenSettings={() => setSettingsOpen(true)} sidebarVisible={sidebarVisible} onToggleSidebar={toggleSidebar} />
       <div id="app" data-testid="app-body">
         <PluginPanel panelRef={officePanelRef} />
