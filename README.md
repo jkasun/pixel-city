@@ -48,7 +48,9 @@ The same canvas can also render live HTML/CSS/JS. Ask an agent to "show me somet
 - **MemPalace** — local vector memory (SQLite + embeddings). Permanent employees keep a diary, a knowledge graph, and can semantically search their own past. So they actually remember what you did last week.
 - **Quick actions** — hook a script or a prompt up to a button in the office. One click, done.
 - **Custom plugins** — drop a package in `packages/plugins/<name>` and the workspace picks it up.
-- **Local-first** — everything lives in `~/.pixelcity/`. No accounts. No telemetry. No cloud.
+- **Local-first** — everything lives in `~/.pixelcity/`. No accounts. No telemetry. No cloud.[^1]
+
+[^1]: One exception: on launch the app pings `api.github.com` once to check for a newer release and shows a small banner if there is one. GitHub sees your IP for that one request — nothing else is sent. Set `update.enabled: false` in `terminal-app/config.yml` to turn it off, or `update.channel: prerelease` to opt into beta releases.
 
 ---
 
@@ -68,6 +70,16 @@ A couple of native modules (`node-pty`, `better-sqlite3`) get rebuilt for Electr
 ---
 
 ## Get it running
+
+### The one-liner (mac & linux)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/jkasun/pixel-city/main/install.sh | sh
+```
+
+Grabs the latest release, drops it in `/Applications` (mac) or `~/.local/bin/pixelcity` (linux), and tells you whether `claude` or `codex` is already on your PATH. On mac it strips the quarantine flag and ad-hoc signs the app so Gatekeeper doesn't yell — the binary isn't notarized, so if you'd rather avoid that, build from source instead. Windows users: grab the `.exe` from the [latest release](https://github.com/jkasun/pixel-city/releases/latest).
+
+### From source
 
 ```bash
 # 1. Clone it
