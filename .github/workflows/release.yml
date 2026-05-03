@@ -40,9 +40,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build & package
+        # No GH_TOKEN here on purpose — its presence flips electron-builder
+        # into auto-publish mode, which demands a `repository` field and
+        # collides with our separate `release` job below. We just want
+        # build artifacts written to disk; the release job picks them up.
         run: pnpm --filter pixel-city-terminal ${{ matrix.target }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
