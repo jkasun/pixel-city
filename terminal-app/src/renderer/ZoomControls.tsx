@@ -1,0 +1,108 @@
+import { useState, useEffect, useRef } from 'react'
+import {
+  ZOOM_MIN,
+  ZOOM_MAX,
+  ZOOM_LEVEL_FADE_DELAY_MS,
+  ZOOM_LEVEL_HIDE_DELAY_MS,
+  ZOOM_LEVEL_FADE_DURATION_SEC,
+} from '@pixel-city/shared/constants'
+import { ZoomInIcon, ZoomOutIcon } from './icons/index.js'
+
+interface ZoomControlsProps {
+  zoom: number
+  onZoomChange: (zoom: number) => void
+}
+
+const btnBase: React.CSSProperties = {
+  width: 40,
+  height: 40,
+  padding: 0,
+  background: 'var(--bg-popup)',
+  color: 'var(--text-bright)',
+  border: '2px solid var(--border)',
+  borderRadius: 0,
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxShadow: '2px 2px 0px var(--bg-deep)',
+}
+
+export function ZoomControls({ zoom, onZoomChange }: ZoomControlsProps) {
+  const [hovered, setHovered] = useState<'minus' | 'plus' | null>(null)
+  const [showLevel, setShowLevel] = useState(false)
+  const [fadeOut, setFadeOut] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const fadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const prevZoomRef = useRef(zoom)
+
+  const minDisabled = zoom <= ZOOM_MIN
+  const maxDisabled = zoom >= ZOOM_MAX
+
+  useEffect(() => {
+    if (zoom === prevZoomRef.current) return
+    prevZoomRef.current = zoom
+    if (timerRef.current) clearTimeout(timerRef.current)
+    if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current)
+    setShowLevel(true)
+    setFadeOut(false)
+    fadeTimerRef.current = setTimeout(() => setFadeOut(true), ZOOM_LEVEL_FADE_DELAY_MS)
+    timerRef.current = setTimeout(() => { setShowLevel(false); setFadeOut(false) }, ZOOM_LEVEL_HIDE_DELAY_MS)
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+      if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current)
+    }
+  }, [zoom])
+
+  return (
+    <>
+      {showLevel && (
+        <div style={{
+          position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
+          zIndex: 50, background: 'var(--bg-popup)', border: '2px solid var(--border)', borderRadius: 0,
+          padding: '4px 12px', boxShadow: '2px 2px 0px var(--bg-deep)', fontSize: '14px',
+          color: 'var(--text-bright)', userSelect: 'none', pointerEvents: 'none',
+          opacity: fadeOut ? 0 : 1, transition: `opacity ${ZOOM_LEVEL_FADE_DURATION_SEC}s ease-out`,
+          fontFamily: 'inherit',
+        }}>
+          {zoom}x
+        </div>
+      )}
+      <div style={{
+        position: 'absolute', bottom: 10, left: 10, zIndex: 50,
+        display: 'flex', flexDirection: 'row', gap: 4,
+      }}>
+        <button
+          onClick={() => onZoomChange(zoom + 1)}
+          disabled={maxDisabled}
+          onMouseEnter={() => setHovered('plus')}
+          onMouseLeave={() => setHovered(null)}
+          style={{
+            ...btnBase,
+            background: hovered === 'plus' && !maxDisabled ? 'var(--bg-hover)' : btnBase.background,
+            cursor: maxDisabled ? 'default' : 'pointer',
+            opacity: maxDisabled ? 0.35 : 1,
+          }}
+          title="Zoom in (Ctrl+Scroll)"
+        >
+          <ZoomInIcon size={18} />
+        </button>
+        <button
+          onClick={() => onZoomChange(zoom - 1)}
+          disabled={minDisabled}
+          onMouseEnter={() => setHovered('minus')}
+          onMouseLeave={() => setHovered(null)}
+          style={{
+            ...btnBase,
+            background: hovered === 'minus' && !minDisabled ? 'var(--bg-hover)' : btnBase.background,
+            cursor: minDisabled ? 'default' : 'pointer',
+            opacity: minDisabled ? 0.35 : 1,
+          }}
+          title="Zoom out (Ctrl+Scroll)"
+        >
+          <ZoomOutIcon size={18} />
+        </button>
+      </div>
+    </>
+  )
+}

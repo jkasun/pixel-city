@@ -1,0 +1,23 @@
+{
+  "name": "@pixel-city/plugin-board",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./board": "./src/board/index.ts",
+    "./board/*": "./src/board/*.ts",
+    "./components": "./src/components/index.ts",
+    "./icons": "./src/icons.tsx"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "@pixel-city/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "@types/react": "^19.0.0"
+  }
+}

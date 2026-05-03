@@ -1,0 +1,25 @@
+{
+  "name": "@pixel-city/plugin-messages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./messaging": "./src/messaging/index.ts",
+    "./messaging/*": "./src/messaging/*.ts",
+    "./tools": "./src/tools.ts",
+    "./icons": "./src/icons.tsx",
+    "./components/*": "./src/components/*.tsx"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "zod": ">=3",
+    "@pixel-city/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "@types/react": "^19.0.0"
+  }
+}

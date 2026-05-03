@@ -1,0 +1,20 @@
+{
+  "name": "pixel-city",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter pixel-city-terminal run dev",
+    "build": "pnpm --filter pixel-city-terminal run build",
+    "terminal": "pnpm --filter pixel-city-terminal run start",
+    "postinstall": "node node_modules/electron/install.js"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "electron",
+      "electron-winstaller",
+      "node-pty",
+      "protobufjs",
+      "re2"
+    ]
+  }
+}

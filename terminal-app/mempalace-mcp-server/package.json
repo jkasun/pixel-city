@@ -1,0 +1,25 @@
+{
+  "name": "@pixel-city/mempalace-mcp-server",
+  "version": "1.0.0",
+  "description": "MemPalace MCP server — memory palace with knowledge graph, semantic search, and AAAK dialect",
+  "type": "module",
+  "bin": {
+    "mempalace-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "better-sqlite3": "^11.10.0",
+    "ws": "^8.19.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/node": "^22",
+    "@types/ws": "^8.5.0",
+    "typescript": "^5.8.2"
+  }
+}

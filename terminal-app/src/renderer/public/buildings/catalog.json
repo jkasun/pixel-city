@@ -1,0 +1,164 @@
+{
+  "buildings": [
+    {
+      "id": "building_1",
+      "name": "Building 1",
+      "type": "office",
+      "file": "building_1.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_2",
+      "name": "Building 2",
+      "type": "office",
+      "file": "building_2.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_3",
+      "name": "Building 3",
+      "type": "office",
+      "file": "building_3.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_4",
+      "name": "Building 4",
+      "type": "office",
+      "file": "building_4.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_5",
+      "name": "Building 5",
+      "type": "office",
+      "file": "building_5.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_6",
+      "name": "Building 6",
+      "type": "office",
+      "file": "building_6.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_7",
+      "name": "Building 7",
+      "type": "office",
+      "file": "building_7.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_8",
+      "name": "Building 8",
+      "type": "office",
+      "file": "building_8.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_9",
+      "name": "Building 9",
+      "type": "office",
+      "file": "building_9.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_10",
+      "name": "Building 10",
+      "type": "office",
+      "file": "building_10.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1024,
+      "pixelH": 1024
+    },
+    {
+      "id": "building_11",
+      "name": "Building 11",
+      "type": "office",
+      "file": "building_11.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 778,
+      "pixelH": 700
+    },
+    {
+      "id": "building_12",
+      "name": "Building 12",
+      "type": "office",
+      "file": "building_12.png",
+      "footprintW": 4,
+      "footprintH": 4,
+      "pixelW": 1374,
+      "pixelH": 1102
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "default-van",
+      "name": "Van",
+      "files": {
+        "down": "van-down.png",
+        "up": "van-up.png",
+        "left": "van-left.png",
+        "right": "van-left.png"
+      },
+      "pixelW": 504,
+      "pixelH": 464,
+      "tileLrW": 1,
+      "tileLrH": 0.6,
+      "tileUdW": 0.7,
+      "tileUdH": 0.6,
+      "speedMin": 0.5,
+      "speedMax": 1,
+      "mirrorLR": true
+    },
+    {
+      "id": "default-car",
+      "name": "Car",
+      "files": {
+        "down": "car-down.png",
+        "up": "car-up.png",
+        "left": "car-left.png",
+        "right": "car-left.png"
+      },
+      "pixelW": 664,
+      "pixelH": 598,
+      "tileLrW": 0.9,
+      "tileLrH": 0.5,
+      "tileUdW": 0.6,
+      "tileUdH": 0.5,
+      "speedMin": 0.5,
+      "speedMax": 1.5,
+      "mirrorLR": true
+    }
+  ]
+}

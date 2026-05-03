@@ -1,0 +1,154 @@
+/* ── Markdown preview styles ──────────────────────────────────────
+ *
+ * Used by EditorPanel's .md-preview container.
+ * Import this stylesheet in both terminal-app and web-app.
+ */
+
+.md-preview p { margin: 0 0 10px; }
+.md-preview p:last-child { margin-bottom: 0; }
+.md-preview strong { color: var(--text-bright); }
+.md-preview em { color: var(--accent); font-style: italic; }
+
+.md-preview h1,
+.md-preview h2,
+.md-preview h3,
+.md-preview h4 {
+  font-weight: 600;
+  margin: 20px 0 8px;
+}
+.md-preview h1:first-child,
+.md-preview h2:first-child,
+.md-preview h3:first-child { margin-top: 0; }
+
+.md-preview h1 {
+  font-size: 1.45em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 5px;
+}
+.md-preview h2 {
+  font-size: 1.2em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 3px;
+}
+.md-preview h3 { font-size: 1.06em; color: var(--text-bright); }
+.md-preview h4 { font-size: 0.96em; color: var(--text-bright); }
+
+.md-preview ul,
+.md-preview ol {
+  margin: 0 0 10px;
+  padding-left: 22px;
+}
+.md-preview li { margin-bottom: 3px; }
+.md-preview li::marker { color: var(--accent); }
+
+.md-preview code {
+  background: rgba(92, 154, 125, 0.1);
+  color: var(--accent);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.88em;
+  font-family: inherit;
+}
+
+.md-preview pre {
+  margin: 0 0 12px;
+  padding: 0;
+  background: none;
+  border: none;
+  overflow-x: auto;
+}
+
+.md-preview pre code.hljs {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  padding: 12px 14px;
+  font-size: 0.88em;
+  line-height: 1.5;
+  font-family: inherit;
+  display: block;
+}
+
+.md-preview pre code:not(.hljs) {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  padding: 12px 14px;
+  font-size: 0.88em;
+  line-height: 1.5;
+  color: var(--text);
+  display: block;
+}
+
+.md-preview blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  background: rgba(92, 154, 125, 0.04);
+  color: var(--text-muted);
+  border-radius: 0 4px 4px 0;
+}
+
+.md-preview a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: border-color 0.15s;
+}
+.md-preview a:hover {
+  border-bottom-color: var(--accent);
+}
+
+.md-preview hr {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: 16px 0;
+}
+
+.md-preview input[type="checkbox"] {
+  margin-right: 6px;
+  accent-color: var(--accent);
+}
+
+.md-preview img {
+  max-width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+}
+
+.md-preview table {
+  border-collapse: collapse;
+  margin: 0 0 12px;
+  width: 100%;
+}
+
+.md-preview th,
+.md-preview td {
+  border: 1px solid var(--border-subtle);
+  padding: 5px 8px;
+  text-align: left;
+  font-size: 11px;
+}
+
+.md-preview th {
+  background: rgba(92, 154, 125, 0.08);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.md-preview tr:nth-child(even) td {
+  background: var(--bg-hover);
+}
+
+/* ── Search highlight (flash line on jump-to-result) ─── */
+
+.search-highlight-line {
+  animation: search-flash 1.2s ease-out;
+}
+
+@keyframes search-flash {
+  0% { background-color: rgba(92, 154, 125, 0.3); }
+  100% { background-color: transparent; }
+}

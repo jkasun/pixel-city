@@ -1,0 +1,27 @@
+{
+  "name": "@pixel-city/ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.tsx"
+  },
+  "dependencies": {
+    "@pixel-city/core": "workspace:*",
+    "@pixel-city/shared": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "@xterm/xterm": ">=5",
+    "@xterm/addon-fit": ">=0.10"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "@types/react": "^19.0.0",
+    "@xterm/xterm": "^6.0.0",
+    "@xterm/addon-fit": "^0.11.0"
+  }
+}

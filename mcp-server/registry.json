@@ -1,0 +1,11 @@
+{
+  "servers": [
+    { "name": "pixel-city-office", "file": "office-control" },
+    { "name": "pixel-city-board", "file": "board-control" },
+    { "name": "pixel-city-files", "file": "file-explorer-control" },
+    { "name": "pixel-city-browser", "file": "browser-control" },
+    { "name": "pixel-city-messages", "file": "messages-control" },
+    { "name": "pixel-city-quick-actions", "file": "quick-actions-control" },
+    { "name": "pixel-city-plugins", "file": "plugins-bridge" }
+  ]
+}

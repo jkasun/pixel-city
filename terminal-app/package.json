@@ -1,0 +1,167 @@
+{
+  "name": "pixel-city-terminal",
+  "version": "1.2.1",
+  "description": "Electron terminal app for Pixel City",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Janith Kasun",
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "postinstall": "electron-rebuild -f -w node-pty,better-sqlite3",
+    "start": "npm run build:main && electron .",
+    "dev": "npm run bundle-mcp:mempalace && npm run build:dev-mcp && concurrently -k \"npm run dev:renderer\" \"npm run dev:main\" \"npm run dev:mempalace\" \"npm run dev:electron\"",
+    "dev:renderer": "vite",
+    "dev:main": "tsc -p tsconfig.electron.json --watch --preserveWatchOutput",
+    "dev:mempalace": "npx esbuild mempalace-mcp-server/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/mempalace-mcp-server/index.mjs --banner:js=\"import{createRequire}from'module';const require=createRequire(import.meta.url);\" --external:better-sqlite3 --watch",
+    "dev:electron": "wait-on http://localhost:5913 && wait-on dist/electron/main.js && VITE_DEV_SERVER_URL=http://localhost:5913 electronmon .",
+    "build:main": "tsc -p tsconfig.electron.json",
+    "build": "npm run build:main && npm run bundle-mcp:mempalace && vite build",
+    "dist": "npm run build && npm run bundle-mcp && electron-builder --mac --win --linux --config",
+    "dist:mac": "npm run build && npm run bundle-mcp && electron-builder --mac --config",
+    "dist:win": "npm run build && npm run bundle-mcp && electron-builder --win --config",
+    "dist:linux": "npm run build && npm run bundle-mcp && electron-builder --linux --config",
+    "bundle-mcp": "npm run bundle-mcp:pixel-city && npm run bundle-mcp:mempalace",
+    "bundle-mcp:pixel-city": "node tools/bundle-mcp-servers.mjs",
+    "bundle-mcp:mempalace": "rm -rf dist/mempalace-mcp-server && mkdir -p dist/mempalace-mcp-server && npx esbuild mempalace-mcp-server/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/mempalace-mcp-server/index.mjs --banner:js=\"import{createRequire}from'module';const require=createRequire(import.meta.url);\" --external:better-sqlite3",
+    "deploy:local": "npm run dist:mac && cp -R 'release/mac-arm64/Pixel City.app' /Applications/",
+    "build:dev-mcp": "npx esbuild src/dev-mcp-server/index.ts --bundle --platform=node --format=cjs --target=node18 --outfile=dist/dev-mcp-server/index.cjs --external:electron",
+    "dev:mcp": "npm run build:dev-mcp && node dist/dev-mcp-server/index.cjs",
+    "build:test-mcp": "npx esbuild src/test-mcp-server/index.ts --bundle --platform=node --format=cjs --target=node18 --outfile=dist/test-mcp-server/index.cjs --external:electron",
+    "test:mcp": "npm run build:test-mcp && node dist/test-mcp-server/index.cjs",
+    "test": "vitest run --config vitest.config.unit.ts",
+    "test:watch": "vitest --config vitest.config.unit.ts",
+    "lint:bulkhead": "eslint --config eslint.config.js \"src/renderer/**/*.{ts,tsx,js,jsx}\""
+  },
+  "build": {
+    "appId": "com.janith.pixel-city",
+    "productName": "Pixel City",
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/node-pty/**/*",
+      "node_modules/better-sqlite3/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "src/fonts/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/mcp-server/",
+        "to": "mcp-server/",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "dist/mempalace-mcp-server/index.mjs",
+        "to": "mempalace-mcp-server/dist/index.mjs"
+      },
+      {
+        "from": "node_modules/better-sqlite3",
+        "to": "mempalace-mcp-server/node_modules/better-sqlite3",
+        "filter": [
+          "**/*",
+          "!build/Release/obj.target/**",
+          "!deps/**",
+          "!docs/**",
+          "!src/**",
+          "!benchmark/**",
+          "!test/**"
+        ]
+      },
+      {
+        "from": "mempalace-mcp-server/node_modules/bindings",
+        "to": "mempalace-mcp-server/node_modules/bindings"
+      },
+      {
+        "from": "mempalace-mcp-server/node_modules/file-uri-to-path",
+        "to": "mempalace-mcp-server/node_modules/file-uri-to-path"
+      }
+    ],
+    "icon": "build/icon.png",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg",
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "executableName": "Pixel City"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Development",
+      "icon": "build/icon.png"
+    }
+  },
+  "dependencies": {
+    "@assistant-ui/react": "^0.12.22",
+    "@assistant-ui/react-markdown": "^0.12.8",
+    "@excalidraw/excalidraw": "^0.18.0",
+    "@monaco-editor/react": "^4.7.0",
+    "@pixel-city/core": "workspace:*",
+    "@pixel-city/plugin-board": "workspace:*",
+    "@pixel-city/plugin-canvas": "workspace:*",
+    "@pixel-city/plugin-files": "workspace:*",
+    "@pixel-city/plugin-git": "workspace:*",
+    "@pixel-city/plugin-messages": "workspace:*",
+    "@pixel-city/plugin-office": "workspace:*",
+    "@pixel-city/shared": "workspace:*",
+    "@pixel-city/ui": "workspace:*",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/addon-image": "^0.9.0",
+    "@xterm/addon-ligatures": "^0.10.0",
+    "@xterm/addon-search": "^0.16.0",
+    "@xterm/addon-unicode11": "^0.9.0",
+    "@xterm/addon-web-links": "^0.12.0",
+    "@xterm/addon-webgl": "^0.19.0",
+    "@xterm/xterm": "^6.0.0",
+    "better-sqlite3": "^11.10.0",
+    "dompurify": "^3.3.3",
+    "highlight.js": "^11.11.1",
+    "isomorphic-git": "^1.37.4",
+    "js-yaml": "^4.1.1",
+    "marked": "^17.0.4",
+    "node-pty": "^1.0.0",
+    "react": "^19.2.4",
+    "react-arborist": "^3.4.3",
+    "react-dom": "^19.2.4",
+    "simple-git": "^3.32.3",
+    "split.js": "^1.6.5",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.3",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/dompurify": "^3.0.5",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.11.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^5.1.4",
+    "concurrently": "^9.2.1",
+    "electron": "^28.0.0",
+    "electron-builder": "^26.8.1",
+    "electronmon": "^2.0.4",
+    "tailwindcss": "^4.2.2",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.1.1",
+    "wait-on": "^8.0.5",
+    "zod": "^4.3.6"
+  }
+}

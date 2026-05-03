@@ -1,0 +1,4 @@
+[
+  { "id": "main-office", "name": "Main Office", "file": "layouts/main-office.json" },
+  { "id": "bon-bon-cafe", "name": "Bon Bon Cafe", "file": "layouts/bon-bon-cafe.json" }
+]

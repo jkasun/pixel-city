@@ -1,0 +1,183 @@
+/* ── Pixel City Shared Theme ────────────────────────────────────
+ * CSS custom properties for all themes.
+ * Both terminal-app and web-app import this file.
+ *
+ * NOTE: The @theme block (Tailwind v4 token bridge) must live in
+ * each app's own styles.css alongside @import "tailwindcss".
+ * This file only provides runtime CSS variable definitions.
+ * ────────────────────────────────────────────────────────────── */
+
+/* ── Default theme (dark) ─────────────────────────────────────── */
+:root {
+  --bg: #0a0a0c;
+  --bg-card: #0e0e11;
+  --bg-hover: #1a1a20;
+  --bg-deep: #050508;
+  --bg-popup: #1e1e22;
+  --bg-input: #111114;
+  --text: #c8c5be;
+  --text-dim: #78756f;
+  --text-muted: #908c86;
+  --text-bright: #eae7e0;
+  --accent: #5c9a7d;
+  --accent-dim: #3d7a60;
+  --border: #1e1c22;
+  --border-subtle: #181620;
+  --git-modified: #e2c08d;
+  --git-added: #73c991;
+  --git-deleted: #c74e39;
+  --git-unmerged: #c97b7b;
+  --font-ui: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Light theme ──────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg: #f5f5f7;
+  --bg-card: #ffffff;
+  --bg-hover: #e8e8ec;
+  --bg-deep: #eaeaef;
+  --bg-popup: #ffffff;
+  --bg-input: #f0f0f4;
+  --text: #2c2c2e;
+  --text-dim: #636366;
+  --text-muted: #545458;
+  --text-bright: #1d1d1f;
+  --accent: #3a7a5f;
+  --accent-dim: #2d6a4e;
+  --border: #c7c7cc;
+  --border-subtle: #d8d8dd;
+  --git-modified: #9a6700;
+  --git-added: #1a7f37;
+  --git-deleted: #b32d2d;
+  --git-unmerged: #9a4040;
+}
+
+/* ── Creme theme ──────────────────────────────────────────────── */
+[data-theme="creme"] {
+  --bg: #FFF7D0;
+  --bg-card: #FFF9E0;
+  --bg-hover: #FFE6B8;
+  --bg-deep: #FFDCA0;
+  --bg-popup: #FFFAEB;
+  --bg-input: #FFEECC;
+  --text: #5a4a30;
+  --text-dim: #7a6a4a;
+  --text-muted: #6a5a3a;
+  --text-bright: #3a2e1a;
+  --accent: #c08a40;
+  --accent-dim: #a07030;
+  --border: #FFCCA6;
+  --border-subtle: #FFD8B4;
+  --git-modified: #8a5d00;
+  --git-added: #1a7030;
+  --git-deleted: #a02828;
+  --git-unmerged: #8a3535;
+}
+
+/* ── Nord theme ───────────────────────────────────────────────── */
+[data-theme="nord"] {
+  --bg: #2e3440;
+  --bg-card: #3b4252;
+  --bg-hover: #434c5e;
+  --bg-deep: #272c36;
+  --bg-popup: #3b4252;
+  --bg-input: #353c4a;
+  --text: #d8dee9;
+  --text-dim: #8790a0;
+  --text-muted: #9ba3b4;
+  --text-bright: #eceff4;
+  --accent: #88c0d0;
+  --accent-dim: #5e81ac;
+  --border: #434c5e;
+  --border-subtle: #3b4252;
+  --git-modified: #ebcb8b;
+  --git-added: #a3be8c;
+  --git-deleted: #bf616a;
+  --git-unmerged: #d08770;
+}
+
+/* ── Monokai theme ────────────────────────────────────────────── */
+[data-theme="monokai"] {
+  --bg: #272822;
+  --bg-card: #2d2e27;
+  --bg-hover: #3e3d32;
+  --bg-deep: #1e1f1a;
+  --bg-popup: #3e3d32;
+  --bg-input: #333429;
+  --text: #f8f8f2;
+  --text-dim: #90908a;
+  --text-muted: #a6a69c;
+  --text-bright: #f9f8f5;
+  --accent: #a6e22e;
+  --accent-dim: #66d9ef;
+  --border: #49483e;
+  --border-subtle: #3e3d32;
+  --git-modified: #f4bf75;
+  --git-added: #a6e22e;
+  --git-deleted: #f92672;
+  --git-unmerged: #ae81ff;
+}
+
+/* ── Shared utility styles ────────────────────────────────────── */
+
+/* DM sidebar row — used by agents and shell terminals.
+ * Active state uses the theme's accent so it tracks every theme,
+ * and uses !important on the active background to defeat the
+ * `bg-transparent` Tailwind utility on the same element. */
+.dm-row {
+  background: transparent;
+  border-left: 2px solid transparent;
+  transition: background-color 100ms, border-left-color 100ms;
+}
+.dm-row:hover {
+  background: var(--bg-hover);
+}
+.dm-row[data-active="true"] {
+  background: color-mix(in srgb, var(--accent) 22%, transparent) !important;
+  border-left-color: var(--accent);
+}
+.dm-row[data-active="true"]:hover {
+  background: color-mix(in srgb, var(--accent) 30%, transparent) !important;
+}
+
+/* xterm.js overrides */
+.xterm, .xterm * { font-family: var(--font-mono); }
+.xterm { height: 100%; padding: 6px 10px; background-color: var(--bg) !important; }
+.xterm-viewport { scroll-behavior: smooth; background-color: var(--bg) !important; }
+.xterm-viewport::-webkit-scrollbar { width: 5px; }
+.xterm-viewport::-webkit-scrollbar-track { background: transparent; }
+.xterm-viewport::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.xterm-viewport::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* StatusBar agent indicator pulse */
+.status-bar-agent-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: status-bar-pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes status-bar-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Loading animations */
+.pc-loader { display: flex; flex-direction: column; align-items: center; gap: 18px; animation: pc-loader-in 0.3s ease-out; }
+.pc-loader-dots { display: flex; gap: 6px; }
+.pc-loader-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pc-dot-bounce 1.4s ease-in-out infinite; }
+.pc-loader-dot:nth-child(2) { animation-delay: 0.16s; }
+.pc-loader-dot:nth-child(3) { animation-delay: 0.32s; }
+.pc-loader-text { font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.5px; animation: pc-loader-pulse 2s ease-in-out infinite; }
+@keyframes pc-dot-bounce { 0%, 80%, 100% { transform: scale(0.4); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
+@keyframes pc-loader-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes pc-loader-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }

@@ -1,0 +1,39 @@
+release/
+.worktrees/
+scripts/node_modules/
+scripts/service-account-key.json
+.pixelcity
+**/.mcp.json
+**/.secret.local
+tmp-ai/
+.mcp.json
+test-space/
+.claude/
+**/node_modules/
+
+# build output
+**/dist/
+**/build/
+.vite/
+*.tsbuildinfo
+
+# os
+.DS_Store
+Thumbs.db
+
+# editor / personal
+.gemini/
+.vscode/
+.idea/
+*.swp
+
+# logs / coverage
+*.log
+coverage/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+AGENTS.md

@@ -1,0 +1,30 @@
+{
+  "name": "@pixel-city/core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./backend": "./src/backend/index.ts",
+    "./backend/*": "./src/backend/*.ts",
+    "./llm": "./src/llm/index.ts",
+    "./llm/*": "./src/llm/*.ts",
+    "./renderers": "./src/renderers/index.ts",
+    "./renderers/*": "./src/renderers/*.ts",
+    "./plugin": "./src/plugin/index.ts",
+    "./plugin/*": "./src/plugin/*.ts",
+    "./session": "./src/session/index.ts",
+    "./session/*": "./src/session/*.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "zod": ">=3"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "@types/react": "^19.0.0",
+    "zod": ">=3"
+  }
+}

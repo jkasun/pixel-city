@@ -1,0 +1,69 @@
+# ─────────────────────────────────────────────────────────
+# Pixel City Terminal App — Configuration
+# ─────────────────────────────────────────────────────────
+
+# ── PubSub Transport (messages) ───────────────────────────
+pubsub:
+  ws:
+    url: ws://localhost:19850
+
+# ── Ports ─────────────────────────────────────────────────
+ports:
+  mcpWs: 19840          # MCP WebSocket bridge (dev) — packaged uses +1
+  testWs: 19842         # Test MCP WebSocket server
+  pubsubWs: 19850       # PubSub WebSocket server (built-in broker)
+
+# ── Messages ──────────────────────────────────────────────
+messages:
+  pollIntervalMs: 30000       # Fallback polling interval for UI
+
+# ── TTS (Text-to-Speech) ─────────────────────────────────
+tts:
+  url: https://dashscope-intl.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation
+  model: qwen3-tts-instruct-flash
+  modelVc: qwen3-tts-vc-2026-01-22
+  maxCharsPerChunk: 550
+  defaultRate: 1.4
+  maxRetries: 3
+  cacheAhead: 5
+  maxConcurrentFetch: 2
+  maxCacheSize: 50
+
+# ── MCP Server Manager ───────────────────────────────────
+mcp:
+  defaultToolTimeoutMs: 60000
+  initTimeoutMs: 30000
+  requestTimeoutMs: 15000
+  screenshotTimeoutMs: 30000
+  waitTimeoutMs: 30000
+  connectTimeoutMs: 5000
+  maxReconnectDelayMs: 10000
+
+# ── Terminal ──────────────────────────────────────────────
+terminal:
+  defaultScrollback: 5000
+  shellEnvTimeoutMs: 10000
+  maxBufferBytes: 52428800     # 50MB
+
+# ── JSONL / Subagent Watcher ──────────────────────────────
+jsonlWatch:
+  subagentDirPollMs: 1500
+  subagentFilePollMs: 2000
+  subagentIdleSafetyNetMs: 120000
+  subagentEndTurnGraceMs: 4000
+
+# ── LLM Context ──────────────────────────────────────────
+llm:
+  maxTokenBudget: 50000
+  keepRecentMessages: 10
+
+# ── Browser ───────────────────────────────────────────────
+browser:
+  defaultUrl: https://www.google.com
+
+# ── Window ────────────────────────────────────────────────
+window:
+  width: 1400
+  height: 700
+  minWidth: 800
+  minHeight: 400

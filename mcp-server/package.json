@@ -1,0 +1,25 @@
+{
+  "name": "pixel-city-mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "pixel-city-mcp": "./index.js",
+    "pixel-city-office-control": "./servers/office-control.js",
+    "pixel-city-board-control": "./servers/board-control.js",
+    "pixel-city-file-explorer-control": "./servers/file-explorer-control.js",
+    "pixel-city-browser-control": "./servers/browser-control.js",
+    "pixel-city-git-control": "./servers/git-control.js",
+    "pixel-city-messages-control": "./servers/messages-control.js",
+    "pixel-city-quick-actions-control": "./servers/quick-actions-control.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "description": "MCP server for Pixel City — lets Claude Code control the virtual office",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "ws": "^8.19.0",
+    "zod": "^4.3.6"
+  }
+}
